@@ -3,6 +3,13 @@ This repo is a collection of various individual batch uploads based on
 [lokal-profil/wikidata-stuff](https://github.com/lokal-profil/wikidata-stuff)
 (they were split out from that repo).
 
+To run it you will have to install `wikidata-stuff` using:
+`pip install git+https://github.com/lokal-profil/wikidata-stuff.git`
+
+*Note*: You might have to add the `--process-dependency-links` flag to the above
+command if you are running a different version of pywikibot from the required one.
+
+
 These projects are mainly here for my own use and to illustrate how wikidataStuff
 can be used. There is no guarantee that any of them will work at any given time
 since I'm not guaranteeing that I keep them in sync with any later changes to
