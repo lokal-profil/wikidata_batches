@@ -1,7 +1,7 @@
 ## About this repo
 This repo is a collection of various individual batch uploads based on
 [lokal-profil/wikidata-stuff](https://github.com/lokal-profil/wikidata-stuff)
-(they we split out from that repo).
+(they were split out from that repo).
 
 These projects are mainly here for my own use and to illustrate how wikidataStuff
 can be used. There is no guarantee that any of them will work at any given time
