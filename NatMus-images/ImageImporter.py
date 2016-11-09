@@ -11,6 +11,7 @@ from wikidataStuff.WikidataStuff import WikidataStuff as WD
 import wikidataStuff.wdqsLookup as wdqsLookup
 import codecs
 import pywikibot
+import os.path as path
 EDIT_SUMMARY = u'import using #NatMus data'
 
 usage = u"""
@@ -33,7 +34,9 @@ class PaintingsImageBot:
         self.wd = WD(self.repo, edit_summary=EDIT_SUMMARY)
 
         # Set log file
-        self.log = codecs.open(u'PaintingsImageBot.log', 'a', 'utf-8')
+        out_dir = path.join(path.split(__file__)[0])
+        log_filename = path.join(out_dir, u'PaintingsImageBot.log')
+        self.log = codecs.open(log_filename, 'a', 'utf-8')
 
     def run(self):
         """Start the robot."""
