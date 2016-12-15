@@ -87,22 +87,16 @@ class PaintingsImageBot:
         # unit = self.wd.QtoItemPage(unit)
         unit = entity_url_hack(unit)
 
-        # Set error based on significant figures but assume the same accuracy
-        # on both height and width.
-        error = min(
-            helpers.sig_fig_error(dimensions.get('height')),
-            helpers.sig_fig_error(dimensions.get('width')))
-
         height = pywikibot.WbQuantity(
             dimensions.get('height'),
             # unit=unit,
             entity=unit,
-            error=error)
+            site=self.wd.repo)
         width = pywikibot.WbQuantity(
             dimensions.get('width'),
             # unit=unit,
             entity=unit,
-            error=error)
+            site=self.wd.repo)
 
         # make claims
         self.wd.addNewClaim(
