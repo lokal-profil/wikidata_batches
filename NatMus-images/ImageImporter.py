@@ -157,7 +157,8 @@ class PaintingsImageBot:
             pywikibot.Site('commons', 'commons'), commons_file)
 
         # check if another image is already used
-        if prop in item.claims and not self.wd.hasClaim(prop, file_page, item):
+        if prop in item.claims and \
+                not self.wd.has_claim(prop, file_page, item):
             self.log.write(
                 u"%s already contains image claim: %s -> %s\n" % (
                     item.title(),

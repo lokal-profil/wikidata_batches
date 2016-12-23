@@ -297,8 +297,8 @@ class PaintingsBot:
 
         # abort if conflicting info
         if europeana_prop in painting_item.claims and \
-                not self.wd.hasClaim(europeana_prop, europeana_id,
-                                     painting_item):
+                not self.wd.has_claim(europeana_prop, europeana_id,
+                                      painting_item):
             pywikibot.output(u'%s has conflicting %s. Expected %s' %
                              (painting_item, europeana_prop, europeana_id))
             return
@@ -660,8 +660,8 @@ class PaintingsBot:
 
         # abort if conflicting info
         if self.painting_id_prop in painting_item.claims and \
-                not self.wd.hasClaim(self.painting_id_prop, painting_id,
-                                     painting_item):
+                not self.wd.has_claim(self.painting_id_prop, painting_id,
+                                      painting_item):
             pywikibot.output(u'%s has conflicting inv. no (%s). Expected %s' %
                              (painting_item, self.painting_id_prop,
                               painting_id))

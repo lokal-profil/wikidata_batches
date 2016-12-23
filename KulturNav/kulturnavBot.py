@@ -423,8 +423,9 @@ class KulturnavBot(object):
 
     def withoutClaimTest(self, hitItem, P, Q, descr):
         """
-        Base test that an item does not contain a particular claim
-        parm hitItem: item to check
+        Base test that an item does not contain a particular claim.
+
+        param hitItem: item to check
         param P: the property to look for
         param Q: the Q claim to look for
         param descr: a descriptive text
@@ -432,7 +433,7 @@ class KulturnavBot(object):
         """
         P = u'P%s' % P.lstrip('P')
         testItem = self.wd.QtoItemPage(Q)
-        if self.wd.hasClaim(P, testItem, hitItem):
+        if self.wd.has_claim(P, testItem, hitItem):
             pywikibot.output(u'%s is matched to %s, '
                              u'FIXIT' % (hitItem.title(), descr))
             return False
@@ -441,12 +442,13 @@ class KulturnavBot(object):
 
     def withClaimTest(self, hitItem, P, Q, descr, orNone=True):
         """
-        Base test that an item contains a certain claim
-        parm hitItem: item to check
+        Base test that an item contains a certain claim.
+
+        param hitItem: item to check
         param P: the property to look for
         param Q: (list) of Q claim to look for
         param descr: a descriptive text
-        param orNone: if no Claim is also ok
+        param orNone: if complete absence of the Property is also ok
         return bool
         """
         P = u'P%s' % P.lstrip('P')
@@ -457,7 +459,7 @@ class KulturnavBot(object):
         # check claims
         if P in hitItem.claims.keys():
             for testItem in testItems:
-                if self.wd.hasClaim(P, testItem, hitItem):
+                if self.wd.has_claim(P, testItem, hitItem):
                     return True
             else:
                 pywikibot.output(u'%s is identified as something other '
