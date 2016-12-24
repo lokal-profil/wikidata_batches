@@ -5,11 +5,11 @@ Quick bot for checking reciprocity of Wikidata-Kulturnav links.
 
 @todo: Add some type of simple html output (e.g. bootstrap from json)
 """
-import os
 import json
+import os
 import urllib2
-import wikidataStuff.wdqsLookup as wdqsLookup
 import pywikibot.data.wikidataquery as wdquery
+import wikidataStuff.wdqsLookup as wdqsLookup
 import wikidataStuff.helpers as helpers
 from kulturnavBot import KulturnavBot
 

@@ -15,13 +15,15 @@ usage:
 &params;
 """
 import json
+import re
 import time
-import pywikibot
 import urllib2
+
+import pywikibot
+
 import wikidataStuff.helpers as helpers
 import wikidataStuff.wdqsLookup as wdqsLookup
 from wikidataStuff.WikidataStuff import WikidataStuff as WD
-import re
 
 FOO_BAR = u'A multilingual result (or one with multiple options) was ' \
           u'encountered but I have yet to support that functionality'

@@ -16,12 +16,11 @@ usage:
 # Claims to add:
 # * P106 occupation - fieldOfActivityOfThePerson
 # * connected paintings (different source?, or run this from nationalmuseumSE)
-
+import wikidataStuff.helpers as helpers
+from wikidataStuff.WikidataStuff import WikidataStuff as WD
 from kulturnavBot import parameter_help
 from kulturnavBot import KulturnavBot
 from kulturnavBotTemplates import Person
-import wikidataStuff.helpers as helpers
-from wikidataStuff.WikidataStuff import WikidataStuff as WD
 docuReplacements = {
     '&params;': parameter_help
 }

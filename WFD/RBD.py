@@ -14,10 +14,10 @@ usage:
 
 &params;
 """
+import pywikibot
 import wikidataStuff.helpers as helpers
 import wikidataStuff.wdqsLookup as wdqsLookup
 from wikidataStuff.WikidataStuff import WikidataStuff as WD
-import pywikibot
 
 parameter_help = u"""\
 RBDbot options (may be omitted):

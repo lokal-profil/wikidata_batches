@@ -6,12 +6,14 @@ to Wikidata.
 
 The source data are the LIDO files used for the image import (into Commons)
 """
+import codecs
+import os.path as path
+
+import pywikibot
+
 import wikidataStuff.helpers as helpers
 from wikidataStuff.WikidataStuff import WikidataStuff as WD
 import wikidataStuff.wdqsLookup as wdqsLookup
-import codecs
-import pywikibot
-import os.path as path
 EDIT_SUMMARY = u'import using #NatMus data'
 
 usage = u"""

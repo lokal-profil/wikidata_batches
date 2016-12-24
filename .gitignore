@@ -11,8 +11,13 @@ logs/
 *.ctrl
 *.lwp
 
+# Data files (exception may occur)
+*.xls
+*.xsd
+*.xml
+
 # various
 *.log
 .tox/
 .coverage
-
+*.pdf

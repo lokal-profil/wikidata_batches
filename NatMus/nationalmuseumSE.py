@@ -16,15 +16,17 @@ Based on http://git.wikimedia.org/summary/labs%2Ftools%2Fmultichill.git
 Can also handle any pywikibot options. Most importantly:
 -simulate         Don't write to database
 """
+import codecs
+import json
+import urllib2
+
 import pywikibot
 from pywikibot import pagegenerators
 import pywikibot.data.wikidataquery as wdquery
-import config as config
 import wikidataStuff.helpers as helpers
 from wikidataStuff.WikidataStuff import WikidataStuff as WD
-import json
-import codecs
-import urllib2
+
+import config as config
 
 usage = u"""
 Usage:            python NatMus/nationalmuseumSE.py [OPTIONS]
