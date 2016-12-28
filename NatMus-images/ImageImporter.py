@@ -37,7 +37,7 @@ class PaintingsImageBot:
         self.wd = WD(self.repo, edit_summary=EDIT_SUMMARY)
 
         # Set log file
-        out_dir = path.join(path.split(__file__)[0])
+        out_dir = path.split(__file__)[0]
         log_filename = path.join(out_dir, u'PaintingsImageBot.log')
         self.log = codecs.open(log_filename, 'a', 'utf-8')
 
@@ -76,7 +76,8 @@ class PaintingsImageBot:
         dimensions = lido_data.get('measurements').get('_')  # non-framed
         if not dimensions or not dimensions.get('unit'):
             return None
-        elif not dimensions.get('width') or not dimensions.get('height') \
+        elif not helpers.is_number(dimensions.get('width')) or \
+                not helpers.is_number(dimensions.get('height')) \
                 or dimensions.get('depth'):
             # skip complicated cases for now
             return None
@@ -92,13 +93,13 @@ class PaintingsImageBot:
 
         height = pywikibot.WbQuantity(
             dimensions.get('height'),
-            # unit=unit,
-            entity=unit,
+            unit=unit,
+            # entity=unit,
             site=self.wd.repo)
         width = pywikibot.WbQuantity(
             dimensions.get('width'),
-            # unit=unit,
-            entity=unit,
+            unit=unit,
+            # entity=unit,
             site=self.wd.repo)
 
         # make claims
@@ -286,10 +287,10 @@ def load_commons_data(filename):
 def load_offline_data():
     """Load and prepare the local data."""
     # Hard code filenames because I'm lazy
-    data_dir = u'NatMus-images/data/'
-    commons_names = data_dir + u'obj_id-file-commons.csv'
-    nsid = data_dir + u'local_nsid_mapping.json'
-    processed_lido = data_dir + u'processed_lido.json'
+    data_dir = path.join(path.split(__file__)[0], 'data')
+    commons_names = path.join(data_dir, u'obj_id-file-commons.csv')
+    nsid = path.join(data_dir, u'local_nsid_mapping.json')
+    processed_lido = path.join(data_dir, u'processed_lido.json')
 
     local_nsid = helpers.load_json_file(nsid)
     lido = helpers.load_json_file(processed_lido)
