@@ -16,6 +16,7 @@ Options (required):
 """
 import pywikibot
 import wikidataStuff.helpers as helpers
+import wikidataStuff.wdqsLookup as wdqsLookup
 from wikidataStuff.WikidataStuff import WikidataStuff as WD
 from kulturnavBot import parameter_help
 from kulturnavBot import KulturnavBot
@@ -102,18 +103,18 @@ class KulturnavBotSMM(KulturnavBot):
         elif self.DATASET == 'Varv':
             self.runVarv()
         elif self.DATASET == 'Fartyg':
-            self.class_list = self.wd.wdqLookup(
+            self.class_list = wdqsLookup.wdq_to_wdqs(
                 u'CLAIM[1248]{CLAIM[972:%s]}' %
                 self.DATASETS[u'Klasser']['DATASET_Q'])
-            self.type_list = self.wd.wdqLookup(
+            self.type_list = wdqsLookup.wdq_to_wdqs(
                 u'CLAIM[1248]{'
                 u'CLAIM[972:%s] OR CLAIM[972:%s] OR CLAIM[972:%s]}' % (
                     self.DATASETS[u'Fartygstyper']['DATASET_Q'],
                     self.DATASETS[u'Namngivna']['DATASET_Q'],
                     self.DATASETS[u'Serietillverkade']['DATASET_Q']))
-            self.all_ship_types = self.wd.wdqLookup(
+            self.all_ship_types = wdqsLookup.wdq_to_wdqs(
                 u'CLAIM[31:%s]' % self.SHIPTYPE_Q)
-            self.all_ship_types += self.wd.wdqLookup(
+            self.all_ship_types += wdqsLookup.wdq_to_wdqs(
                 u'CLAIM[31:%s]' % self.BOATTYPE_Q)
             self.runFartyg()
         elif self.DATASET == 'Klasser':

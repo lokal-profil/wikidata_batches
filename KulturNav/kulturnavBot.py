@@ -981,6 +981,9 @@ class KulturnavBot(object):
         @param caseSensitive: whether the comparison is case sensitive
         @type caseSensitive: bool
         """
+        lang_map = {
+            'no': 'nb'
+        }
         # for a list of entries
         if isinstance(name_obj, list):
             for n in name_obj:
@@ -991,8 +994,9 @@ class KulturnavBot(object):
             return
 
         # for a single entry
-        self.wd.addLabelOrAlias(name_obj['@language'], name_obj['@value'],
-                                item, caseSensitive=case_sensitive)
+        lang = lang_map.get(name_obj['@language']) or name_obj['@language']
+        self.wd.addLabelOrAlias(lang, name_obj['@value'], item,
+                                caseSensitive=case_sensitive)
 
     @staticmethod
     def get_kulturnav_generator(uuids, delay=0):
