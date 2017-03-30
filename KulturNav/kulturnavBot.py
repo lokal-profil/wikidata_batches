@@ -218,8 +218,7 @@ class KulturnavBot(object):
         self.cache_max_age = cache_max_age
 
         # trigger wdq query
-        self.itemIds = helpers.fill_cache(self.KULTURNAV_ID_P,
-                                          cache_max_age=cache_max_age)
+        self.itemIds = helpers.fill_cache_wdqs(self.KULTURNAV_ID_P)
 
         # set up WikidataStuff instance
         self.wd = WD(self.repo, self.EDIT_SUMMARY)

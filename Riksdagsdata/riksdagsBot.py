@@ -67,7 +67,7 @@ class RiksdagsBot(object):
                                                force_path=__file__)
 
         # trigger wdq query
-        self.itemIds = helpers.fill_cache(RIKSDAG_ID_P)
+        self.itemIds = helpers.fill_cache_wdqs(RIKSDAG_ID_P)
 
         # set up WikidataStuff object
         self.wd = WD(self.repo)

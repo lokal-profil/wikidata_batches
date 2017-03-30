@@ -102,8 +102,7 @@ class PaintingsBot:
                                                cache_max_age=cache_max_age)
 
         # prepare WDQ artist query (nat_mus_id - Q_id pairs)
-        self.artist_ids = helpers.fill_cache('P2538',
-                                             cache_max_age=cache_max_age)
+        self.artist_ids = helpers.fill_cache_wdqs('P2538')
         # add anons
         for a in anons:
             self.artist_ids[a] = ANON_Q
