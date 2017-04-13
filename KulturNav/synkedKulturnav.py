@@ -299,6 +299,7 @@ def run_test(dataset_id, dataset_q, owner_q, outfile):
         f.write(json.dumps(response))
         f.close()
 
+
 if __name__ == "__main__":
     import sys
     usage = "Usage: python synkedKulturnav.py outdir\n" \

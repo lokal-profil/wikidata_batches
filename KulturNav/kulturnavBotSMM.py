@@ -225,7 +225,8 @@ class KulturnavBotSMM(KulturnavBot):
 
     def runFartyg(self):
         """Start a bot for adding info on ships."""
-        #add navalVessel.wrecked (see 42329089-247c-4045-aa22-967d3fb06dfe)
+        # @todo: add navalVessel.wrecked
+        #        (see 42329089-247c-4045-aa22-967d3fb06dfe)
         rules = KulturnavBotSMM.get_base_ship_rules()
         rules.update({
             u'navalVessel.signalLetters': None,
@@ -830,7 +831,7 @@ class KulturnavBotSMM(KulturnavBot):
     def set_claim_with_start_and_end(self, prop, target_values, main_key,
                                      protoclaims):
         """
-        Adds a claim with start and end date qualifiers to protoclaims.
+        Add a claim with start and end date qualifiers to protoclaims.
 
         Requires the value to be resolvable using kulturnav2Wikidata.
 
@@ -995,6 +996,7 @@ class KulturnavBotSMM(KulturnavBot):
             map_tag=variables.get('MAP_TAG')
         )
         super(KulturnavBotSMM, cls).run_from_list(uuids, *args)
+
 
 if __name__ == "__main__":
     KulturnavBotSMM.main()

@@ -40,6 +40,7 @@ class RBD():
     """Bot to enrich/create info on Wikidata for RBD objects."""
 
     def __init__(self, mappings, new=False, cutoff=None):
+        """Initialise the bot."""
         self.repo = pywikibot.Site().data_repository()
         self.wd = WD(self.repo, EDIT_SUMMARY)
         self.new = new
@@ -180,7 +181,7 @@ class RBD():
         item = None
         try:
             item = self.wd.make_new_item(data, summary)
-        except pywikibot.data.api.APIError, e:
+        except pywikibot.data.api.APIError as e:
             raise pywikibot.Error(u'Error during item creation: %s' % e)
 
         return item
@@ -318,7 +319,7 @@ class RBD():
 
         # Find the country code in mappings (skip if not found)
         country = data.get('countryCode')
-        #language = data.get('@language') # per schema "Code of the language of the file" but it isn't
+        # language = data.get('@language') # per schema "Code of the language of the file" but it isn't
 
         # Send rbd data for the country onwards
         self.process_country_rbd(
@@ -412,6 +413,7 @@ class RBD():
         rbd = RBD(mappings, new=new, cutoff=cutoff)
 
         rbd.process_all_rbd(data)
+
 
 if __name__ == "__main__":
     RBD.main()

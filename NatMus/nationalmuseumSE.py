@@ -416,7 +416,7 @@ class PaintingsBot:
         painting_item = None
         try:
             painting_item = self.wd.make_new_item(data, summary)
-        except pywikibot.data.api.APIError, e:
+        except pywikibot.data.api.APIError as e:
             if e.code == u'modification-failed':
                 # disambiguate and try again
                 for lang, content in data['descriptions'].iteritems():
@@ -424,7 +424,7 @@ class PaintingsBot:
                     data['descriptions'][lang]['value'] = disambiguation
                 try:
                     painting_item = self.wd.make_new_item(data, summary)
-                except pywikibot.data.api.APIError, e:
+                except pywikibot.data.api.APIError as e:
                     if e.code == u'modification-failed':
                         pywikibot.output(u'modification-failed error: '
                                          u'skipping %s' % uri)
@@ -478,7 +478,7 @@ class PaintingsBot:
             artist_entry = dump_entry.iteritems().next()
             self.add_singel_natmus_creator(painting_item, artist_entry, uri)
         elif len(dump_entry) == 2:
-            #self.add_double_natmus_creator(painting_item, dump_entry, uri)
+            # self.add_double_natmus_creator(painting_item, dump_entry, uri)
             # skipping until duplication issue has been solved
             pass
         else:
@@ -993,7 +993,7 @@ def get_single_painting(item):
         api_page = urllib2.urlopen(item_url)
         json_data = json.loads(api_page.read())
         api_page.close()
-    except ValueError, e:
+    except ValueError as e:
         raise pywikibot.Error('Error loading Europeana item at '
                               '%s with error %s' % (item_url, e))
 
@@ -1038,6 +1038,7 @@ def main(*args):
     paintings_bot.add_new = add_new
     paintings_bot.run()
     # paintings_bot.most_missed_creators()
+
 
 if __name__ == "__main__":
     main()

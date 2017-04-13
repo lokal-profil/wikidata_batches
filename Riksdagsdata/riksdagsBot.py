@@ -413,7 +413,7 @@ class RiksdagsBot(object):
     def testRun2(self):
         """Run a test with a folder of local files."""
         dataFiles = helpers.find_files(u'persons', ('.json',), False)
-        print len(dataFiles)
+        # print len(dataFiles)
         for dataFile in dataFiles:
             data = helpers.load_json_file(dataFile)
             try:
@@ -421,6 +421,7 @@ class RiksdagsBot(object):
                 self.extractStatements(data)
             except KeyError:
                 pywikibot.output("%s contains no data" % dataFile)
+
 
 if __name__ == "__main__":
     # Only valid during testing

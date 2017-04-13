@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Bot to import and sourced statements about entities also present in
-KulturNav (https://www.wikidata.org/wiki/Q16323066).
+Bot to import and sourced statements about entities also present in KulturNav.
+
+KulturNav: (https://www.wikidata.org/wiki/Q16323066).
 
 Author: Lokal_Profil
 License: MIT
@@ -94,7 +95,7 @@ class Rule(object):
     @staticmethod
     def hasKeys(needles, haystack):
         """
-        Checks if all the provided keys are present.
+        Check if all the provided keys are present.
 
         :param needles: a list of strings
         :param haystack: a dict
@@ -116,7 +117,7 @@ class Rule(object):
         :return: the matching value
         """
         # allow strings as input but handle them like tuples
-        if isinstance(via_id, basestring):
+        if helpers.is_str(via_id):
             via_id = (via_id, )
 
         i = 0
@@ -181,9 +182,8 @@ class Rule(object):
 
 
 class KulturnavBot(object):
-    """
-    A bot to enrich and create information on Wikidata based on KulturNav info
-    """
+    """Bot to enrich and create information on Wikidata from KulturNav info."""
+
     EDIT_SUMMARY = 'import using #Kulturnav data'
     KULTURNAV_ID_P = '1248'
     GEONAMES_ID_P = '1566'
@@ -205,6 +205,8 @@ class KulturnavBot(object):
 
     def __init__(self, dictGenerator, cache_max_age, verbose=False):
         """
+        Initialise the bot.
+
         Arguments:
             * generator    - A generator that yields Dict objects.
         """
@@ -252,16 +254,16 @@ class KulturnavBot(object):
         cls.EDIT_SUMMARY = edit_summary or cls.EDIT_SUMMARY
 
     def run(self):
-        """
-        Starts the robot
-        """
+        """Start the robot."""
         raise NotImplementedError("run() is not implemented in the base bot.")
 
     def runLayout(self, datasetRules, datasetProtoclaims,
                   datasetSanityTest, label, shuffle):
         """
-        The basic layout of a run. It should be called for a dataset
-        specific run which sets the parameters.
+        The basic layout of a run.
+
+        It should be called for a dataset-specific run which sets the
+        parameters.
 
         param datasetRules: a dict of additional Rules or values to look for
         param datasetProtoclaims: a function for populating protoclaims
@@ -307,7 +309,7 @@ class KulturnavBot(object):
             # find the matching wikidata item
             hitItem = self.wikidataMatch(values)
             self.current_uuid = values['identifier']
-            #@todo: self.current_protoclaims  # allows these to be accessed more easily
+            # @todo: self.current_protoclaims  # allows these to be accessed more easily
 
             # convert values to potential claims
             protoclaims = datasetProtoclaims(self, values)
@@ -348,8 +350,10 @@ class KulturnavBot(object):
 
     def populateValues(self, values, rules, hit):
         """
-        given a list of values and a kulturnav hit, populate the values
-        and check if result is problem free
+        Populate values and check results given a hit.
+
+        Given a list of values and a kulturnav hit, populate the values
+        and check if result is problem free.
 
         @todo: raise Error instead of using problemFree solution
 
@@ -415,7 +419,8 @@ class KulturnavBot(object):
 
     def sanityTest(self, hitItem):
         """
-        A generic sanitytest which should be run independent on dataset
+        A generic sanitytest which should be run independent on dataset.
+
         return bool
         """
         return self.withoutClaimTest(hitItem,
@@ -529,8 +534,9 @@ class KulturnavBot(object):
 
     def wikidataMatch(self, values):
         """
-        Finds the matching wikidata item
-        checks Wikidata first, then kulturNav
+        Find the matching wikidata item.
+
+        Checks Wikidata first, then kulturNav.
 
         return ItemPage|None the matching item
         """
@@ -572,8 +578,7 @@ class KulturnavBot(object):
 
     def addNames(self, names, hitItem, shuffle=False):
         """
-        Given a nameObj or a list of such this prepares them for
-        add_label_or_alias()
+        Prepare a nameObj or a list of such for add_label_or_alias().
 
         param shuffle: bool if name order is last, first then this
                        creates a local rearranged copy
@@ -600,7 +605,7 @@ class KulturnavBot(object):
 
     def addProperties(self, protoclaims, hitItem, ref):
         """
-        add each property (if new) and source it
+        Add each property (if new) and source it.
 
         param protoclaims: a dict of claims with a
             key: Prop number
@@ -625,8 +630,8 @@ class KulturnavBot(object):
     # KulturNav specific functions
     def dbpedia2Wikidata(self, item):
         """
-        Converts a dbpedia reference to the equivalent Wikidata item,
-        if present
+        Convert dbpedia reference to the equivalent Wikidata item, if present.
+
         param item: dict with @language, @value keys
         return pywikibot.ItemPage|None
         """
@@ -689,6 +694,8 @@ class KulturnavBot(object):
 
     def location2Wikidata(self, uuid):
         """
+        Get location from kulturNav uuid.
+
         Given a kulturNav uuid or url this checks if that contains a
         GeoNames url and, if so, connects that to a Wikidata object
         using the GEONAMES_ID_P property (if any).
@@ -711,7 +718,7 @@ class KulturnavBot(object):
                 return self.wd.QtoItemPage(qNo)
 
         # retrieve various sources
-        #@todo: this can be more streamlined by including wdq query for geonames
+        # @todo: this can be more streamlined by including wdq query for geonames
         #       in that method. Possibly sharing the same "look-up and filter"
         #       mechanism for both.
         #       and then using self.locations[uuid] = self.extract... (which
@@ -719,7 +726,7 @@ class KulturnavBot(object):
         #       checking self.locations.get(uuid) before
         #       making an ItemPage
         #
-        #@todo: change self.locations and self.ADMIN_UNITS to include Q prefix (and thus have the methods return that)
+        # @todo: change self.locations and self.ADMIN_UNITS to include Q prefix (and thus have the methods return that)
         geo_sources = self.get_geo_sources(uuid)
         kulturarvsdata = self.extract_kulturarvsdata_location(geo_sources)
         if kulturarvsdata:
@@ -829,6 +836,8 @@ class KulturnavBot(object):
 
     def getLocationProperty(self, item, strict=True):
         """
+        Return appropriate location property for an item.
+
         Given an ItemPage this returns the suitable property which
         should be used to indicate its location.
         P17  - land
@@ -888,8 +897,9 @@ class KulturnavBot(object):
         @return: whether the test passed
         @rtype: bool
         """
-        if not isinstance(uuid, (str, unicode)):
-            print u'Not an uuid in %s: %s' % (self.current_uuid, uuid)
+        if not helpers.is_str(uuid):
+            pywikibot.output(
+                u'Not an uuid in %s: %s' % (self.current_uuid, uuid))
             return False
 
         uuid = uuid.split('/')[-1]  # in case of url
@@ -897,7 +907,8 @@ class KulturnavBot(object):
                   r'\-[0-9a-f]{4}\-[0-9a-f]{12}'
         m = re.search(pattern, uuid)
         if not m or m.group(0) != uuid:
-            print u'Not an uuid in %s: %s' % (self.current_uuid, uuid)
+            pywikibot.output(
+                u'Not an uuid in %s: %s' % (self.current_uuid, uuid))
             return False
 
         return True
@@ -997,7 +1008,7 @@ class KulturnavBot(object):
             time.sleep(delay)
             try:
                 json_data = KulturnavBot.get_single_entry(uuid)
-            except pywikibot.Error, e:
+            except pywikibot.Error as e:
                 pywikibot.output(e)
             else:
                 yield json_data
@@ -1111,7 +1122,7 @@ class KulturnavBot(object):
         try:
             record_page = urllib2.urlopen(item_url)
             json_data = json.loads(record_page.read())
-        except ValueError, e:
+        except ValueError as e:
             raise pywikibot.Error('Error loading KulturNav item at '
                                   '%s with error %s' % (item_url, e))
         if json_data.get(u'@graph'):
@@ -1165,7 +1176,7 @@ class KulturnavBot(object):
             'delay': 0,
             'require_wikidata': True,
             'cache_max_age': 0,
-            }
+        }
 
         for arg in pywikibot.handle_args(args):
             option, sep, value = arg.partition(':')
@@ -1184,10 +1195,12 @@ class KulturnavBot(object):
 
     @staticmethod
     def foobar(item):
+        """Badly named escape mechanism for list results."""
         if isinstance(item, list):
             pywikibot.output(FOO_BAR)
             return True
         return False
+
 
 if __name__ == "__main__":
     KulturnavBot.main()

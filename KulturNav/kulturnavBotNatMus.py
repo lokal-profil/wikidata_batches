@@ -54,7 +54,7 @@ class KulturnavBotNatMus(KulturnavBot):
 
             # add claim about natmus_artist_id
             if values[u'seeAlso'] is not None:
-                if isinstance(values[u'seeAlso'], (str, unicode)):
+                if helpers.is_str(values[u'seeAlso']):
                     values[u'seeAlso'] = helpers.listify(values[u'seeAlso'])
                 for sa in values[u'seeAlso']:
                     if u'collection.nationalmuseum.se/eMuseumPlus' in sa:
@@ -80,6 +80,7 @@ class KulturnavBotNatMus(KulturnavBot):
     def run_from_list(cls, uuids, *args):
         """Start the bot with a list of uuids."""
         super(KulturnavBotNatMus, cls).run_from_list(uuids, *args)
+
 
 if __name__ == "__main__":
     KulturnavBotNatMus.main()

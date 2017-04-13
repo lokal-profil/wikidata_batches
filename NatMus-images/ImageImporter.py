@@ -1,8 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8  -*-
 """
-Bot to import Nationalmuseum (Sweden) illustrations and additional metadata
-to Wikidata.
+Bot to import Nationalmuseum (Sweden) illustrations and metadata to Wikidata.
 
 The source data are the LIDO files used for the image import (into Commons).
 
@@ -215,13 +214,13 @@ class PaintingsImageBot:
         Make a Reference object for the dataset.
 
         Contains 4 parts:
-        * P248: Stated in <the WFD2016 dataset>
+        * P248: Stated in <the Nationalmuseum dataset>
         * P577: Publication date <from creation date of the document>
         * P854: Reference url <using the input url>
         * P813: Retrieval date <current date>
         """
         exit()
-        #P248: Nationalmuseum dataset
+        # P248: Nationalmuseum dataset
         xml_file = lido_data.get('source_file')
         date = helpers.today_as_WbTime()
         pub_date = helpers.iso_to_WbTime(u'2016-09-30')
@@ -387,6 +386,7 @@ def main(*args):
     paintings_bot = PaintingsImageBot(painting_gen, people_items)
     paintings_bot.run()
     paintings_bot.log.close()
+
 
 if __name__ == "__main__":
     """Run from the command line."""
