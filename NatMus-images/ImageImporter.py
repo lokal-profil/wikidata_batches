@@ -4,7 +4,9 @@
 Bot to import Nationalmuseum (Sweden) illustrations and additional metadata
 to Wikidata.
 
-The source data are the LIDO files used for the image import (into Commons)
+The source data are the LIDO files used for the image import (into Commons).
+
+&params;
 """
 import codecs
 import os.path as path
@@ -17,7 +19,7 @@ import wikidataStuff.wdqsLookup as wdqsLookup
 EDIT_SUMMARY = u'import using #NatMus data'
 
 usage = u"""
-Usage:            python Batches/NatMus-images/ImageImporter.py [OPTIONS]
+Usage:            python NatMus-images/ImageImporter.py [OPTIONS]
                   with options:
 
 -rows:INT         Number of entries to process (default: All)
