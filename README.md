@@ -28,8 +28,6 @@ precautions.
 * **`NatMus`**: A [sum of all paintings](http://www.wikidata.org/wiki/Wikidata:WikiProject_sum_of_all_paintings)
   bot for importing paintings from Nationalmuseum Sweden to Wikidata (via
   Europeana).
-* **`WFD`**: A batch import of European water data based on the Water Framework
-  Directive reporting.
 * **`Riksdagsdata`**: An unfinished bot for importing data on members of Sweden's
   Riksdag from the [Riksdag data hub](http://data.riksdagen.se/).
 * **`KulturNav`**
@@ -47,3 +45,7 @@ precautions.
       ([NatMus](http://www.nationalmuseum.se/)) made available through KulturNav.
   * synkedKulturnav.py: A small script for generating statistics on
     KulturNav-Wikidata connections.
+
+### Previous projects
+* **`WFD`**: A batch import of European water data based on the Water Framework
+  Directive reporting. Now in [lokal-profil/WFD_import](https://github.com/lokal-profil/WFD_import)

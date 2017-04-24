@@ -260,7 +260,7 @@ class KulturnavBot(object):
     def runLayout(self, datasetRules, datasetProtoclaims,
                   datasetSanityTest, label, shuffle):
         """
-        The basic layout of a run.
+        Execute the basic layout of a run.
 
         It should be called for a dataset-specific run which sets the
         parameters.
@@ -419,7 +419,7 @@ class KulturnavBot(object):
 
     def sanityTest(self, hitItem):
         """
-        A generic sanitytest which should be run independent on dataset.
+        Execute generic sanitytest which should be run independent on dataset.
 
         return bool
         """
@@ -430,7 +430,7 @@ class KulturnavBot(object):
 
     def withoutClaimTest(self, hitItem, P, Q, descr):
         """
-        Base test that an item does not contain a particular claim.
+        Execute base test that an item does not contain a particular claim.
 
         param hitItem: item to check
         param P: the property to look for
@@ -449,7 +449,7 @@ class KulturnavBot(object):
 
     def withClaimTest(self, hitItem, P, Q, descr, orNone=True):
         """
-        Base test that an item contains a certain claim.
+        Execute base test that an item contains a certain claim.
 
         param hitItem: item to check
         param P: the property to look for
