@@ -40,6 +40,7 @@ NATIONAL_COORD_FILE = 'national_coords.csv'
 COMMONWEALTH_COORD_FILE = 'commonwealth_coords.csv'
 LOGFILE = 'importer.log'
 EDIT_SUMMARY = 'importing Australia #COH #WLM #au'
+DEFAULT_PREC = 0.0001  # default precision for coordinates
 
 
 class ImporterBot(object):
@@ -60,9 +61,9 @@ class ImporterBot(object):
         self.wd = WdS(self.repo, EDIT_SUMMARY)
         self.new = new
         self.cutoff = cutoff
-        self.preview_file = path.join(base_path, preview_file)
         if preview_file:
             self.demo = True
+            self.preview_file = path.join(base_path, preview_file)
         else:
             self.demo = False
         self.preview_data = []
@@ -425,13 +426,18 @@ class ImporterBot(object):
 
         # P625: coordinate
         if data.get('lat') and data.get('lon'):
-            statement = WdS.Statement(
-                pywikibot.Coordinate(
-                    data.get('lat'), data.get('lon'), globe='earth'))
-            statement.add_reference(self.coord_ref[heritage_type])
-            protoclaims['P625'] = statement
+            protoclaims['P625'] = self.get_coordinate_statement(
+                data.get('lat'), data.get('lon'), heritage_type)
 
         return protoclaims
+
+    def get_coordinate_statement(self, lat, lon, heritage_type):
+        """Construct a Statement for the provided coordinates."""
+        statement = WdS.Statement(
+            pywikibot.Coordinate(
+                float(lat), float(lon), globe='earth', precision=DEFAULT_PREC))
+        statement.add_reference(self.coord_ref[heritage_type])
+        return statement
 
     def get_heritage_type(self, typ):
         """Determine which heritage type the object is."""
