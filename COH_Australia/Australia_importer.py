@@ -453,7 +453,7 @@ class ImporterBot(object):
     def parse_date(self, date):
         """Convert date in DD-MMM-YYYY format to WbTime."""
         months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG',
-                  'SEP', 'OCT', 'NOW', 'DEC']
+                  'SEP', 'OCT', 'NOV', 'DEC']
         dd, mmm, yyyy = date.split('-')
         iso = '{year}-{month:02d}-{day:02d}'.format(
             year=yyyy, day=int(dd), month=months.index(mmm) + 1)
